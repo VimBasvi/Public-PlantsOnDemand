@@ -6,7 +6,7 @@ Plants On Demand is a web application that allows users to manage their existing
 
 - **Google OAuth Login**: Users can log in to the application using their Google account, ensuring a secure and seamless authentication process.
 
-- **Protected Area**: After successful login, users can access their protected area, where they can manage their virtual garden and view their plants.
+- **Plant Dashboard**: After successful login, users can access their protected area, where they can manage their virtual garden and view their plants.
 
 - **Plant Search**: Users can search for plants by name and filter them based on care level or other criteria, making it easy to find specific plants.
 
