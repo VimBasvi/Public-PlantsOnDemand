@@ -1,0 +1,22 @@
+<!-- plant_grid.html -->
+{% block content %}
+    <div class="container">
+        <h5 class="text-center mb-4">Your Plant Collection</h5>
+        <div class="row plant-grid">
+            <!-- Loop through the saved plants data and create a card for each plant -->
+            {% for plant in saved_plants %}
+            <a href="/add_reminder/{{ plant.plant_id }}" class="col-md-6 mb-4 plant-link">
+                <div class="card plant-card">
+                    <img src="{{ plant.default_image_url}}" class="card-img-top" alt="{{ plant.common_name }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ plant.common_name }}</h5>
+                        <p class="card-text"><strong>Care Level:</strong> {{ plant.care_level }}</p>
+                        <p class="card-text"><strong>Plant Nickname:</strong> {{ plant.nickname }}</p>
+                        <!-- Add more plant info here if we decide-->
+                    </div>
+                </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

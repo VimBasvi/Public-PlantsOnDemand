@@ -1,0 +1,20 @@
+<!-- plant_grid.html -->
+{% block content %}
+    <div class="container">
+        <h5 class="text-center mb-4">Your Diary Collection</h5>
+        <div class="row plant-grid">
+            <!-- Loop through the saved plants data and create a card for each plant -->
+            {% for log in saved_log %}
+            <a href="/open_note/{{ log.log_id }}" class="col-md-6 mb-4 plant-link">
+            <div class="card plant-card">
+                <div class="card-body">
+                    <h5 class="card-title">{{ log.title }}</h5>
+                    <p class="card-text"><strong>Date:</strong> {{ log.date }}</p>
+                    <!-- Add more plant info here if we decide-->
+                </div>
+            </div>
+            </a>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

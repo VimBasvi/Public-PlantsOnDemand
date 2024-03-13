@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <title>PlantOnDemand</title>
+    <style>
+
+
+    header {
+        position: relative;
+    }
+
+        body, html {
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-image: url('static/images/back3.png'); 
+            background-size: cover;
+            background-position: center;
+            margin: 0;        
+            padding: 0;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+
+
+        main {
+            text-align: center;
+            margin-top: 30px;
+            margin-bottom: 0;
+        }
+
+  
+       #plant {
+            width: 150px;
+            height: 150px;
+
+           /*  border-radius: 50%;
+           margin: 20px auto; */
+        } 
+
+
+
+    #plantDead {
+            padding: 10px 20px;
+            font-size: 30px;
+            color: #333;
+
+            cursor: pointer;
+            margin: 5px;
+            top: 15px;
+        }
+        #health {
+            font-size: 24px;
+            font-weight: bold;
+            top: 30%;  
+            left: 50%; 
+            transform: translate(-0%, 800%);
+
+        }
+
+
+        .top-right {
+    position: absolute;
+    top: 10px;
+    right: 0px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+ 
+    border-radius: 5px;
+}
+
+
+        #healthBarContainer {
+            position: absolute; 
+            width: 30px;
+            top: 50px;
+            right: 10px;
+            height: 200px;
+            border-radius: 5px;     
+            transform-origin: bottom;  
+            background-color: #ccc;
+         
+
+        }
+
+        #healthBar {
+            position: relative;
+            bottom: 0; 
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            border-radius: 5px;
+            background-color: green;
+            transform-origin: bottom;  
+            transition: height 0.2s ease;
+        
+        }
+.plant {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+  margin-top: 390px;
+}
+
+#plantImage {
+  width: 400px;
+  height: 400px;
+  overflow: hidden;  
+position: relative;   
+display: block;
+
+
+}
+
+#playAgainButton {
+  
+position: fixed; 
+ top: 10%;  
+ left: 50%;  
+ transform: translate(-50%, -50%);
+}
+
+#message {
+position: fixed; 
+top: 15%;  
+left: 50%;  
+transform: translate(-50%, -50%);
+
+}
+
+#witheredImage {
+    width: 550px; 
+    height: 450px;
+    display: none;
+    margin-top: 550px;
+}
+
+
+ /*   #waterButton, #sunlightButton, #fertilizeButton {
+    width: 50px;
+    height: 50px;
+    background-image: url('C:\Users\nadu1\OneDrive\Documents\images.jfif'); 
+    background-size: contain;
+    background-repeat: no-repeat;
+    border: none; 
+    cursor: pointer;
+    } */
+
+    .button-circle {
+  position: relative;
+  width: 200px; 
+  height: 200px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.button-circle img {
+  width: 150px;
+  height: 150px;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+}
+
+#waterButton {
+  top: 0;
+  left: 50%;
+  transform: translate(-50%, -40%);
+}
+#sunlightButton {
+  top: 50%;
+  left: 100%;
+  transform: translate(-10%, -70%);
+}
+
+#fertilizeButton {
+  top: 100%;
+  left: 50%;
+  transform: translate(-150%, -130%);
+}
+
+
+     .btn:hover {
+        transform: translateY(-10px);
+        background-color: var(--clr-accent); 
+        color: var(--clr-light);
+    }
+
+.water-drop{
+  width: 40px;
+  height: 40px;
+  position: absolute;
+  bottom: 20%;
+   left: 50%; 
+  transform: translateX(-50%);
+  border-radius: 100%;
+  opacity: 1;
+  transition: all 1s;
+
+    }
+
+
+
+ .animate {
+ animation: fall 2s linear forwards; 
+
+}
+
+    @keyframes fall {
+  0% {
+    bottom: 50%;
+    transform: translateY(-30px);
+    opacity: 1;
+  }
+  100% {
+    bottom: 100; 
+    transform: translateY(0);
+    opacity: 0;
+   
+
+  }
+}
+
+.top-left {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+       .sunlight {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(255, 255, 0, 0.7);
+            border-radius: 50%;
+            position: relative;
+          /*  animation: ;*/
+        }
+
+        .sunlight.ani {
+            animation: sunlightAnimation 3s linear;
+        }
+        
+
+        @keyframes sunlightAnimation {
+            0%, 100% {
+                box-shadow: 0 0 0 0 rgba(255, 255, 0, 0.7), 0 0 20px 30px rgba(255, 255, 0, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 0 200px rgba(255, 255, 0, 0.7), 0 0 20px 250px rgba(255, 255, 0, 0.2);
+            }
+        }
+
+         .scis {
+            position: absolute;
+            top: -10px;
+            left: 100px;
+            width: 100px;
+            height: auto;
+            transform-origin: top center;
+            
+        }
+
+        .scis.ani {
+            animation: scissorsAnimation 1s forwards;
+        }
+
+        #b {
+            visibility: hidden;
+        }
+
+
+        @keyframes scissorsAnimation {
+            0% {
+                transform: rotate(0);
+            }
+            25% {
+                transform: rotate(-10deg);
+            }
+            50% {
+                transform: rotate(0);
+            }
+            75% {
+                transform: rotate(10deg);
+            }
+            100% {
+                transform: rotate(0);
+            }
+        }
+
+        
+.tips-container {
+    position: absolute;
+    top: 50%;
+    width: 200px; /* Adjust the width as needed */
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8); /* Adjust the background color and transparency */
+    border: 1px solid #ccc; /* Add a border around the tips container */
+    border-radius: 5px;
+    transform: translateY(-50%);
+}
+
+ 
+.left {
+    left: 0; /* Position the left tips container on the left side */
+}
+
+.right {
+    right: 0; /* Position the right tips container on the right side */
+}
+
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1 id = "b">PlantsOnDemand</h1>
+    </header>    
+          <div id="dayCounter" class="top-left">Day: 1</div>
+    <main>
+
+     <div class="container">
+      
+          
+     
+
+            <div class ="water-drops-container">
+            </div>
+            <div class="button-circle">
+                    <div class ="plant" id="plantImageContainer">
+        <img src="{{ url_for('static', filename = 'images/5.png') }}" id="plantImage"></div>
+       <img src="static/images/drop.png" alt="Water" id="waterButton" onclick="waterPlant()">
+            <img src="static/images/sun.png" class ="sunlight" id="sunlightButton" onclick="giveSunlight()">
+            <img src ="static/images/scis.png "  class = "scis" id="fertilizeButton" onclick="giveFertilizer()">
+  <img src="{{ url_for('static', filename = 'images/dead.png') }}" id="witheredImage" style="display: none;">
+            </div>
+            
+            <button class="btn" id="plantDead">Plant Withered</button>
+
+            <button class = "btn" id="playAgainButton" onclick="playAgain()">Play Again</button>
+            <p id="health">Plant Health: 100%</p>
+            
+                    <p id="message"></p>  
+                    <div id="healthBarContainer" class="top-right">
+                <div id="healthBar" class="top-right"> </div>
+                 
+            </div>
+        </div>
+     
+
+ <div class="tips-container left" id="leftGardeningTipContainer">
+        <p class="tip-text" id="leftGardeningTip"></p>
+    </div>
+    <div class="tips-container right" id="rightGardeningTipContainer">
+        <p class="tip-text" id="rightGardeningTip"></p>
+    </div>
+
+    </main>
+  
+    <script>
+
+
+        let plantHealth = 100;
+        let day = 1;
+        let dayInterval;
+        let isGameActive = true;
+        let isAnimationRunning;
+        let hasReceivedSunlight = false;
+        let hasReceivedFertilizer = false;
+        document.getElementById('playAgainButton').hidden = true;
+        document.getElementById('plantDead').hidden = true;
+        const sun = document.getElementById('sunlightButton');
+    
+    
+
+        function updatePlantHealth() {
+
+            if (!isGameActive) {
+                const waterButton = document.getElementById('waterButton');
+                waterButton.removeEventListener('click', startAnimation);
+                return;
+            }
+            document.getElementById('health').innerText = `Plant Health: ${plantHealth}%`;
+            document.getElementById('healthBar').style.height = `${plantHealth}%`;
+            if (plantHealth <= 0) {
+             /*   document.getElementById('plant').style.backgroundColor = 'gray'; */
+                document.getElementById('waterButton').disabled = true;
+                document.getElementById('sunlightButton').disabled = true;
+                document.getElementById('fertilizeButton').disabled = true;
+                document.getElementById('sunlightButton').hidden = true;
+                document.getElementById('fertilizeButton').hidden = true;
+                document.getElementById('waterButton').hidden = true; 
+                document.getElementById('plantDead').hidden = false;
+                document.getElementById('message').hidden = true;
+                document.getElementById('playAgainButton').hidden = false;
+                document.getElementById('plantImage').style.display = 'none';
+                document.getElementById('witheredImage').style.display = 'block';
+                document.getElementById('leftGardeningTipContainer').hidden = true; 
+                document.getElementById('rightGardeningTipContainer').hidden = true; 
+
+            } else {
+                document.getElementById('plantDead').hidden = true;
+                document.getElementById('plant').style.backgroundColor = disabled;
+
+ document.getElementById('plantImage').style.display = 'block';
+    document.getElementById('witheredImage').style.display = 'none';
+
+            }
+
+       
+        }
+
+
+
+function updateDayCounter() {
+    const dayCounter = document.getElementById('dayCounter');
+    dayCounter.textContent = `Day: ${day}`;
+}
+
+function updatePlantImage() {
+    const plantImage = document.getElementById('plantImage');
+    const plantImages = [
+        "{{ url_for('static', filename= 'images/6.png') }}",
+        "{{ url_for('static', filename= 'images/7.png') }}",
+        "{{ url_for('static', filename= 'images/8.png') }}",
+        "{{ url_for('static', filename= 'images/9.png') }}",
+
+    ];
+    const currentImageIndex = (day - 2) % plantImages.length;
+    plantImage.src = plantImages[currentImageIndex];
+ 
+}
+
+function updateDay() {
+    day++;
+    lastDay = 15;
+    updateDayCounter();
+
+    if (day % 5 === 1) {
+        updatePlantImage();
+    }
+           if (day % 1 === 0) {
+                showGardeningTip();
+            }
+
+
+    if (day > lastDay || plantHealth <= 0) {
+        clearInterval(dayInterval);
+        if (plantHealth > 0) {
+
+            const messageElement = document.getElementById('message');
+            document.getElementById('message').hidden = false;
+            isGameActive = false;
+            messageElement.textContent = 'Congratulations! You know more about plants!';
+            messageElement.style.color = 'green';
+            document.getElementById('plantDead').hidden = true;
+            document.getElementById('waterButton').hidden = true;
+            document.getElementById('sunlightButton').hidden = true;
+            document.getElementById('fertilizeButton').hidden = true;
+            document.getElementById('playAgainButton').hidden = false;
+            document.getElementById('playAgainButton').disabled = false;      
+        }
+    }
+
+
+}
+
+dayInterval = setInterval(updateDay, 3000);
+
+
+
+
+
+   function waterPlant() {
+    startAnimation();
+  
+    const requestData = {
+        plant_health: plantHealth
+    };
+
+    fetch('/api/water', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        plantHealth = data.plant_health;
+        updatePlantHealth();
+    })
+    .catch(error => console.error('Error:', error));
+  
+}
+
+
+
+function giveSunlight() {
+    playSunlightAnimation();
+    const requestData = {
+        plant_health: plantHealth
+    };
+
+    fetch('/api/sunlight', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(requestData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        plantHealth = data.plant_health;
+        updatePlantHealth();
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+function giveFertilizer() {
+    animateScissors();
+    const requestData = {
+        plant_health: plantHealth
+    };
+
+    fetch('/api/fertilize', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify(requestData) 
+    })
+    .then(response => response.json())
+    .then(data => {
+        plantHealth = data.plant_health;
+        updatePlantHealth();
+    })
+    .catch(error => console.error('Error:', error));
+}
+
+
+        function checkPlantHealth() {
+            if (hasReceivedSunlight && hasReceivedFertilizer) {
+                plantHealth += 0;
+                hasReceivedSunlight = false;
+                hasReceivedFertilizer = false;
+                updatePlantHealth();
+            }
+        }
+
+        let dead = document.getElementById('witheredImage'); 
+
+        function playAgain() {
+
+            plantHealth = 100; 
+            isGameActive = true;
+            day = 1;
+            clearInterval(dayInterval);
+            updateDayCounter();
+            dayInterval = setInterval(updateDay, 3000);
+
+            const waterButton = document.getElementById('waterButton');
+          document.getElementById('leftGardeningTipContainer').hidden = false; 
+                document.getElementById('rightGardeningTipContainer').hidden = false; 
+            waterButton.addEventListener('click', startAnimation);
+            witheredImage.style.display = 'none';
+            document.getElementById('plantImage').src = "{{ url_for('static', filename= 'images/5.png') }}";   
+             document.getElementById('plantImage').style.display = 'block';
+            document.getElementById('message').hidden = true;
+            document.getElementById('waterButton').disabled = false;
+            document.getElementById('sunlightButton').disabled = false;
+            document.getElementById('fertilizeButton').disabled = false;
+            document.getElementById('waterButton').innerText = 'Water';
+            document.getElementById('sunlightButton').hidden = false;
+            document.getElementById('fertilizeButton').hidden = false;
+            document.getElementById('waterButton').hidden = false;
+               
+          /*  document.getElementById('plant').style.backgroundColor = 'green'; */
+            document.getElementById('playAgainButton').hidden = true;
+            document.getElementById('plant').style.backgroundColor = disabled; 
+
+            updatePlantHealth();
+            updateDay();
+
+            
+       
+        }
+
+        setInterval(function() {
+            if (plantHealth > 0) {
+                plantHealth -= 5;
+                updatePlantHealth();
+            }
+        }, 500); 
+
+          function playSunlightAnimation() {  
+                    const sunlightButton = document.getElementById('sunlightButton');
+            sunlightButton.classList.add('ani');
+
+            
+            sunlightButton.addEventListener('animationend', () => {
+                sunlightButton.classList.remove('ani');
+            });
+          
+        }
+      
+        const gardeningTips = [
+            "Tip 1: Water your plants early in the morning for best results.",
+            "Tip 2: Use natural compost to enrich the soil.",
+            "Tip 3: Prune your plants regularly to encourage healthy growth.",
+            "Tip 4: Provide proper drainage for your potted plants.",
+ "Tip 5: Mulch around your plants to retain moisture and suppress weeds.",
+    "Tip 6: Avoid overwatering your plants, as it can lead to root rot.",
+    "Tip 7: Choose the right plants for your climate and growing conditions.",
+    "Tip 8: Rotate the location of your plants each season to prevent soil depletion.",
+    "Tip 9: Remove dead or yellowing leaves from your plants to improve their appearance.",
+    "Tip 10: Check for pests regularly and take action if you notice any infestations.",
+    "Tip 11: Use companion planting to improve the health and productivity of your garden.",
+    "Tip 12: Fertilize your plants with a balanced fertilizer to promote healthy growth.",
+    "Tip 13: Consider using raised beds for better soil drainage and control over the growing environment.",
+    "Tip 14: Keep a gardening journal to track the progress of your plants and learn from your successes and failures.",
+    "Tip 15: Allow some wildflowers or native plants to grow in your garden to attract pollinators and beneficial insects.",
+    "Tip 16: Use natural pest control methods such as neem oil or insecticidal soap.",
+    "Tip 17: Don't forget to deadhead flowers to encourage new blooms.",
+    "Tip 18: Learn about the specific needs and preferences of each plant in your garden.",
+    "Tip 19: Harvest fruits and vegetables when they are fully ripe for the best flavor.", 
+    
+        ];
+        
+function getRandomPosition() {
+
+    const windowHeight = window.innerHeight;
+    const windowWidth = window.innerWidth;
+    const containerHeight = document.getElementById('leftGardeningTipContainer').offsetHeight;
+    const containerWidth = document.getElementById('leftGardeningTipContainer').offsetWidth;
+
+    const randomTop = Math.floor(Math.random() * (windowHeight - containerHeight));
+    const randomLeft = Math.floor(Math.random() * (windowWidth - containerWidth));
+
+    return { top: randomTop + 'px', left: randomLeft + 'px' };
+} 
+
+          function showGardeningTip() {
+   const leftGardeningTipContainer = document.getElementById('leftGardeningTipContainer');
+    const rightGardeningTipContainer = document.getElementById('rightGardeningTipContainer');
+    const leftGardeningTip = document.getElementById('leftGardeningTip');
+    const rightGardeningTip = document.getElementById('rightGardeningTip');
+
+    const randomTip = gardeningTips[Math.floor(Math.random() * gardeningTips.length)];
+
+    if (Math.random() >= 0.5) {
+        leftGardeningTip.textContent = randomTip;
+        leftGardeningTipContainer.style.visibility = 'visible';
+        rightGardeningTipContainer.style.visibility = 'hidden';
+    } else {
+        rightGardeningTip.textContent = randomTip;
+        rightGardeningTipContainer.style.visibility = 'visible';
+        leftGardeningTipContainer.style.visibility = 'hidden';
+    }
+
+    const randomPosition = getRandomPosition();
+    leftGardeningTipContainer.style.top = randomPosition.top;
+    leftGardeningTipContainer.style.left = randomPosition.left;
+
+    rightGardeningTipContainer.style.top = randomPosition.top;
+    rightGardeningTipContainer.style.left = randomPosition.left;
+
+    setTimeout(() => {
+        leftGardeningTipContainer.style.visibility = 'hidden';
+        rightGardeningTipContainer.style.visibility = 'hidden';
+    }, 2000);
+        }
+
+
+
+
+         function animateScissors() {
+            const scissors = document.querySelector('.scis');
+            scissors.classList.add('ani');
+
+            scissors.addEventListener('animationend', () => {
+                scissors.classList.remove('ani');
+            });
+        }
+
+function startAnimation() {
+
+    if (isAnimationRunning) {
+        return;
+    }
+
+
+    const waterButton = document.getElementById('waterButton');
+    const waterDropsContainer = document.querySelector('.water-drops-container');
+
+ for (let i = 0; i < 9; i++) {
+        const drop = document.createElement('img');
+        drop.src = "static/images/drop.png"; 
+        drop.classList.add('water-drop');
+        waterDropsContainer.appendChild(drop);
+    }
+
+const waterDrops = document.querySelectorAll('.water-drop');
+
+waterButton.addEventListener('click', () => {
+     isAnimationRunning = true;
+  waterDrops.forEach((drop, index) => {
+
+    const randomTop = Math.floor(Math.random() * (55 - 45 + 1)) + 45;
+    const randomSpeed = Math.random() + 0.5
+    const horPosition = 30 + (index * 15); 
+    const randLeft = Math.floor(Math.random() * (55 - 45 + 1)) + 45;
+    drop.style.top = `${randomTop}%`; 
+    drop.style.bottom = `${horPosition}%`; 
+    drop.style.left = `${randLeft}%`; 
+    drop.style.animationDuration = `${randomSpeed}s`; 
+    drop.classList.add('animate');
+  });
+
+
+  setTimeout(() => {
+    waterDrops.forEach((drop) => drop.remove());
+      isAnimationRunning = false;
+  }, 1000); 
+});
+
+
+}
+
+
+
+
+    </script>
+</body>
+</html>

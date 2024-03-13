@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+Write Diary
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h5 class="text-center mb-4">Your Notes Collection</h5>
+        <div class="row plant-grid">
+            <!-- Loop through the saved plants data and create a card for each plant -->
+            {% for note in saved_notes %}
+            <div class="col-md-4 mb-4">
+                <div class="card plant-card">
+                    <div class="card-body">
+                        <h5 class="card-title" id="title" name="title">{{ note.title }}</h5>
+                        <p class="card-text"><strong>Date:</strong> {{ note.date }}</p>
+                        <!-- Add more plant info here if we decide-->
+                        <a href="/diary_delete/{{ note.log_id }}" class="btn btn-primary">Delete</a>
+                        <a class="btn btn-primary" href="/open_note/{{ note.log_id }}">Open</a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="container mt-5"> 
+        <div class="form-group">
+            <h4 class="mb-3"> Write and save notes on your saved plants </h4> 
+            <button type="submit" class="btn btn-primary mt-3" onclick="addLog()">Add log+</button>
+        </div>
+
+    </div>
+
+    <script> 
+        // when card is clicked view plants -- such a miracle worker!
+        function addLog(){
+            //redirect details to page with plantID
+            window.location.href = "/plant_write";
+        }
+
+    </script>
+            
+
+{% endblock %}

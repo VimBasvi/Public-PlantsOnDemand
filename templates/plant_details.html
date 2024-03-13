@@ -1,0 +1,117 @@
+
+<!--Modified and done-->
+{% extends "layout.html" %}
+
+{% block title %} Plant Details {% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row">
+            <!-- The first half of the page shows the plant image -->
+            <div class="col-lg-6">
+                <!-- image of the plant -->
+                <img src="{{ plant.default_image.original_url }}" alt="{{ plant.common_name }} Image" class="img-thumbnail mx-auto d-block mb-3" style="width: 100%; height: auto; object-fit: cover;">
+            </div>
+
+            <!-- The second half of the page displays the detailed information -->
+            <div class="col-lg-6">
+                <h2 class="mb-4" style="text-transform: capitalize;">{{ plant.common_name }}</h2>
+                <!-- brief description of the plant, highlighting its key features and characteristics -->
+                <p><strong>Description:</strong> {{ plant.description }}</p>
+
+                <!-- Collapsible Plant Details Section -->
+                <div class="collapse mt-3" id="plantDetails">
+                    <p><strong>Scientific Name:</strong> {{ plant.scientific_name[0] }}</p>
+                    <p><strong>Family:</strong> {{ plant.family }}</p>
+                    <p><strong>Origin:</strong>{{ plant.origin | join(', ') }}</p>
+                    <p>Type: {{ plant.plant_type }}</p>
+                    <p>Dimension: {{ plant.dimension }}</p>
+                    <p>Cycle: {{ plant.cycle }}</p>
+                    <p>Watering: {{ plant.watering }}</p>
+
+                    <!-- Plant Anatomy -->
+                    <p>Plant Anatomy:</p>
+                    <ul>
+                        {% for part in plant.plant_anatomy %}
+                            <li>{{ part.part }}: {{ part.color | join(', ') }}</li>
+                        {% endfor %}
+                    </ul>
+
+                    <p>Sunlight: {{ plant.sunlight | join(', ') }}</p>
+                    <p>Pruning Month: {{ plant.pruning_month | join(', ') }}</p>
+                    <p>Maintenance: {{ plant.maintenance }}</p>
+                    <p>Care Level: {{ plant.care_level }}</p>
+                    <!-- Add a nickname input field rmvd and shifted to addplant section -->
+                    
+                    <!-- Add Plant section -->
+                    <div class="text-center mt-3">
+                        <form action="/add_plant" method="POST">
+                                <input type="hidden" name="plant_id" value="{{plant.id}}">
+                                <input type="hidden" name="common_name" value="{{ plant.common_name }}">
+                                <div class="form-group mt-3">
+                                    <label for="nickname">Nickname:</label>
+                                    <input type="text" class="form-control" id="nickname" name="nickname" placeholder="Enter nickname for the plant">
+                                </div>                        
+                                <input type="hidden" name="scientific_name" value="{{ plant.scientific_name[0] }}">
+                                <input type="hidden" name="other_names" value="{{ plant.other_names }}">
+                                <input type="hidden" name="family" value="{{ plant.family }}">
+                                <input type="hidden" name="origin" value="{{ plant.origin }}">
+                                <input type="hidden" name="plant_type" value="{{ plant.type }}">
+                                <input type="hidden" name="dimension" value="{{ plant.dimension }}">
+                                <input type="hidden" name="dimensions" value="{{ plant.dimensions }}">
+                                <input type="hidden" name="cycle" value="{{ plant.cycle }}">
+                                <input type="hidden" name="watering" value="{{ plant.watering }}">
+                                <input type="hidden" name="depth_water_requirement" value="{{ plant.depth_water_requirement}}">
+                                <input type="hidden" name="volume_water_requirement" value="{{ plant.volume_water_requirement }}">
+                                <input type="hidden" name="watering_period" value="{{ plant.watering_period }}">
+                                <input type="hidden" name="watering_general_benchmark" value="{{plant.watering_general_benchmark}}">
+                                <input type="hidden" name="default_image_url" value="{{ plant.default_image.original_url}}">
+                                <input type="hidden" name="propagation" value="{{ plant.propagation }}">
+                                <input type="hidden" name="maintenance" value="{{ plant.maintenance }}">
+                                <input type="hidden" name="care_level" value="{{ plant.care_level }}">
+                                <input type="hidden" name="care_guides" value="{{ plant.care_guides }}">
+                                <input type="hidden" name="pruning_month" value="{{ plant.pruning_month }}">
+                                <input type="hidden" name="pruning_count" value="{{ plant.pruning_count }}">
+                                <input type="hidden" name="seeds" value="{{ plant.seeds }}">
+                                <input type="hidden" name="flowering_season" value="{{ plant.flowering_season }}">
+                                <input type="hidden" name="flowering_color" value="{{ plant.flowering_color }}">
+                                <input type="hidden" name="cones" value="{{ plant.cones }}">
+                                <input type="hidden" name="fruits" value="{{ plant.fruits }}">
+                                <input type="hidden" name="edible_fruit" value="{{ plant.edible_fruit }}">
+                                <input type="hidden" name="edible_leaf" value="{{ plant.edible_leaf }}">
+                                <input type="hidden" name="medicinal" value="{{ plant.medicinal }}">
+                                <input type="hidden" name="poisonous_to_humans" value="{{ plant.poisonous_to_humans }}">
+                                <input type="hidden" name="poisonous_to_pets" value="{{ plant.poisonous_to_pets }}">
+                                <input type="hidden" name="description" value="{{ plant.description }}">
+                                <input type="hidden" name="hardiness_min" value="{{ plant.hardiness.min }}">
+                                <input type="hidden" name="hardiness_max" value="{{ plant.hardiness.max }}">
+                                <input type="hidden" name="hardiness_map" value="{{ plant.hardiness_location.full_url}}">
+                                <input type="hidden" name="soil" value="{{ plant.soil }}">
+                            <button type="submit" class="btn btn-primary mt-3">Add Plant</button>
+                        </form>
+                    </div>            
+                </div>
+
+                <!-- Button to toggle the collapsible section -->
+                <div class="text-center mt-3">
+                    <button type="button" class="btn btn-primary" data-bs-toggle="collapse" data-bs-target="#plantDetails" aria-expanded="false" aria-controls="plantDetails" onclick="toggleButtonText(this)">
+                        See more...
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function toggleButtonText(button) {
+    const collapseElement = document.getElementById('plantDetails');
+    if (collapseElement.classList.contains('show')) {
+        button.textContent = 'See more...';
+    } else {
+        button.textContent = 'See less...';
+    }
+}
+</script>
+{% endblock %}

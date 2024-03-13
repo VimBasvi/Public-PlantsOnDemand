@@ -1,0 +1,12 @@
+<!-- login.html -->
+{% extends "layout.html" %}
+
+{% block title %}Login{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <h1>Login to Plant Care App</h1>
+        <p>Please sign in using your Google account to access all the features.</p>
+        <a href="{{ url_for('login') }}" class="btn btn-primary">Login with Google</a>
+    </div>
+{% endblock %}

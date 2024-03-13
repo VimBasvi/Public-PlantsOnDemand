@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- ... your existing meta tags and title ... -->
+    <link rel="stylesheet" href="styles.css"> <!-- Link to your CSS file -->
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+</head>
+
+<style> 
+/* ... your existing CSS rules ... */
+
+.top-left {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background-color: rgba(0, 0, 0, 0.7);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+
+
+/* ... your existing CSS rules ... */
+
+
+
+</style>
+<body>
+    <!-- ... your existing HTML content ... -->
+
+    <div id="dayCounter" class="top-left">Day: 1</div>
+
+    <!-- ... your existing HTML content ... -->
+ <div class="plant" id="plantImageContainer">
+        <img src="5.png"  id="plantImage">
+        <!-- Water drops container -->
+        <div class="water-drops-container">
+            <!-- Water droplets will be added dynamically here -->
+        </div>
+    </div>
+
+
+
+
+    <script>
+        // ... your existing JavaScript code ...
+
+let day = 1;
+
+
+function updateDayCounter() {
+    const dayCounter = document.getElementById('dayCounter');
+    dayCounter.textContent = `Day: ${day}`;
+}
+
+function updatePlantImage() {
+    const plantImage = document.getElementById('plantImage');
+    const plantImages = [
+        '6.png', // Replace with the path to the first plant image
+        '7.png',
+        '8.png',
+        '9.png', // Replace with the path to the second plant image
+        // Add more plant images as needed
+    ];
+    const currentImageIndex = (day - 2 ) % plantImages.length;
+    plantImage.src = plantImages[currentImageIndex];
+    plantImageContainer.style.backgroundColor = 'green'; // Reset the background color
+}
+
+
+
+// Update the day counter every 5 seconds
+/*setInterval(() => {
+    day++;
+    updateDayCounter();
+
+    // Update the plant image every 14 days
+    if (day % 5 === 1) {
+        updatePlantImage();
+    }
+}, 500); */
+
+function updateDay() {
+    day++;
+    updateDayCounter();
+    lastDay = 24; 
+
+    // Update the plant image every 5 days
+    if (day % 5 === 1) {
+        updatePlantImage();
+    }
+
+    // Check if it's time to stop updating the images
+    if (day > lastDay) {
+        clearInterval(dayInterval);
+    }
+}
+
+// Start the day counter using setInterval
+const dayInterval = setInterval(updateDay, 500);
+
+
+
+    </script> <!-- Include the JavaScript file -->
+</body>
+
+
+</html>

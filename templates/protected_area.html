@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <!-- Plant Grid (Half of the page) -->
+            <div class="col-md-6">
+                {% include "plant_grid.html" %}
+            </div>
+            <!-- Plant Timeline and Plant Diaries (Half of the page) -->
+            <div class="col-md-6">
+                {% include "diary_grid.html" %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

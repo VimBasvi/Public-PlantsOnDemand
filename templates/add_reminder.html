@@ -1,0 +1,58 @@
+{% extends "layout.html" %}
+
+{% block title %} Reminder {% endblock %}
+
+{% block content %}
+<div class="container">
+    <h5 class="text-center mb-4">Set Watering Reminder</h5>
+    <form action="/add_reminder/{{ plant.plant_id }}" method="POST" class="reminder-form">
+        <input type="hidden" name="plant_id" value="{{ plant.plant_id }}">
+        <div class="form-group">
+            <label for="reminder_frequency">Frequency:</label>
+            <select name="reminder_frequency" id="reminder_frequency" class="form-control">
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+            </select>
+        </div>
+        <!-- There's a bit of a design stoppage here, we might want to only make this appear when they select something -->
+        <div class="form-group" id="day_select" style="display: none;">
+            <label for="reminder_day">Select Day:</label>
+            <select name="reminder_day" id="reminder_day" class="form-control">
+                <option value="default_if_none">None</option>
+                <option value="monday">Monday</option>
+                <option value="tuesday">Tuesday</option>
+                <option value="wednesday">Wednesday</option>
+                <option value="thursday">Thursday</option>
+                <option value="friday">Friday</option>
+                <option value="saturday">Saturday</option>
+                <option value="sunday">Sunday</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <!--Note that we are using 24hr the PM and AM helps with that-->
+            <label for="reminder_time">Preferred Time:</label>
+            <input type="time" name="reminder_time" id="reminder_time" class="form-control">
+        </div>
+        <!-- Add the hidden input field to store the user's time zone we'll need this for the create_google_calendar_event -->
+        <input type="hidden" name="user_time_zone" id="user_time_zone" value="">
+        <button type="submit" class="btn btn-primary">Set Reminder</button>
+    </form>
+</div>
+
+<script>
+    // JavaScript code to show/hide the "Select Day" field based on the selected reminder frequency
+    const reminderFrequencySelect = document.getElementById("reminder_frequency");
+    const daySelectDiv = document.getElementById("day_select");
+
+    reminderFrequencySelect.addEventListener("change", function () {
+        const selectedFrequency = reminderFrequencySelect.value;
+        daySelectDiv.style.display = selectedFrequency === "weekly" ? "block" : "none";
+    });
+    // Get the user's time zone and set it in the hidden input field for the create_google_calendar_event
+    document.addEventListener('DOMContentLoaded', function () {
+        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone; //this helps us a lot!
+        document.getElementById('user_time_zone').value = userTimeZone; 
+    });
+</script>
+{% endblock %}

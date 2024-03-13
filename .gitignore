@@ -1,0 +1,8 @@
+*.db
+*.sqlite
+*.sqlite3
+
+# Contain passwords and keys:
+.env
+
+client_secret.json

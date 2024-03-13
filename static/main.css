@@ -1,0 +1,190 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Open+Sans:wght@400;700&display=swap');
+/*modified 7/27/2023*/
+html {
+    height: 100%;
+    background-color: #f6f5ee; /* Use this color as a fallback */
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    background-color: #f6f5ee;
+    color: #043927;
+    background-image: url("static\images\back4.png");
+    height: 100%;
+}
+
+html {
+    background-image: url("static\images\back4.png");
+    height: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Playfair Display', serif;
+    color: #AA8B56;
+    
+}
+
+.container {
+    padding: 20px;
+}
+
+.home-header {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-top: 50px;
+    background-image: url('header.jpg');
+    background-size: cover;
+    background-position: center center;
+}
+
+.home-content {
+    text-align: justify;
+    text-justify: inter-word;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.navbar {
+    background-color: #043927;
+}
+
+.navbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px;
+    color: #f6f5ee;
+}
+
+.navbar-nav .nav-item .nav-link {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 16px;
+    color: #f6f5ee;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+    color: #AA8B56;
+}
+
+
+
+/*specifically for search pg abv*/
+.plant-card {
+    border: 3px solid #043927;
+    background: linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(230,230,230,0.9) 100%);
+    box-shadow: 0 0 20px #AA8B56;
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.plant-card:hover {
+    transform: scale(1.1) rotate(3deg);
+    box-shadow: 0px 15px 30px #AA8B56, 0px 10px 10px #AA8B56;
+}
+
+.plant-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+
+/*specifically for search pg abv*/
+.card {
+    border: none;
+    background-color: #fff;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.card:hover {
+    box-shadow: 0 0 25px rgba(0,0,0,0.2);
+    transform: scale(1.05);
+}
+
+.card-img-top {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    height: 150px;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 16px;
+}
+
+.card-title {
+    font-size: 24px;
+    color: #043927;
+}
+
+.card-text {
+    font-size: 16px;
+    color: #333;
+}
+
+/* Footer Styles */
+footer {
+    padding: 20px;
+    background-color: #043927;
+    color: #f6f5ee;
+    text-align: center;
+    font-size: 14px;
+}
+
+/*Button*/
+/* Primary Button */
+.btn-primary {
+    background-color: #043927;
+    color: #f6f5ee;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #AA8B56;
+    color: #f6f5ee;
+}
+
+/* Secondary Button */
+.btn-secondary {
+    background-color: #f6f5ee;
+    color: #043927;
+    border: 2px solid #043927;
+    transition: background-color 0.3s ease-in-out, color 0.3s ease-in-out;
+}
+
+.btn-secondary:hover,
+.btn-secondary:focus {
+    background-color: #043927;
+    color: #f6f5ee;
+}
+
+/* Accent Button */
+.btn-accent {
+    background-color: #AA8B56;
+    color: #f6f5ee;
+    border: none;
+    transition: background-color 0.3s ease-in-out;
+}
+
+.btn-accent:hover,
+.btn-accent:focus {
+    background-color: #043927;
+    color: #f6f5ee;
+}
+
+
+
+/*footer*/
+footer a {
+    color: #f6f5ee;
+}
+
+footer a:hover {
+    color: #AA8B56;
+}
